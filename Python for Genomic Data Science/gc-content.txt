@@ -1,0 +1,19 @@
+#read DNA sequence from user
+dna = 'acgctcgcgcggcgatagctgatcgatcggcgcgctttttttttaaaag'
+
+#count the number of C’s in DNA sequence
+no_c=dna.count('c')
+
+#count the number of G’s in DNA sequence
+no_g=dna.count('g')
+
+#determine the length of the DNA sequence
+dna_length=len(dna)
+
+#compute the GC%
+gc_percent=(no_c+no_g)*100.0/dna_length
+
+#print GC%
+print(gc_percent)
+
+53.06122448979592
