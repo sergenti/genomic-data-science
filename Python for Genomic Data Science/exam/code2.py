@@ -3,8 +3,6 @@ from collections import Counter
 
 
 # calculate the start position and the length of longest ORF in sequence
-
-
 def orf(sequence, reading_frame):
     seq = sequence[reading_frame-1:]
     max_len_orf = 0
@@ -32,6 +30,7 @@ def repeat_substring(sequence, repeat_num):
 
 
 def fasta_analysis(input_file, reading_frame, n):
+
     fasta_sequences = SeqIO.parse(open(input_file), 'fasta')
 
     record_num = 0
@@ -40,8 +39,7 @@ def fasta_analysis(input_file, reading_frame, n):
     sub_sum = []
 
     for fasta in fasta_sequences:
-        name, sequence, description = fasta.id, str(
-            fasta.seq), str(fasta.description).split()
+        name, sequence, description = fasta.id, str(fasta.seq), str(fasta.description).split()
         record_num += 1
         seq_len = len(sequence)
         record_len[description[0]] = seq_len
@@ -55,18 +53,17 @@ def fasta_analysis(input_file, reading_frame, n):
         for i in range(len(substring_list)):
             sub_sum.append(substring_list[i])
 
-    record_len_sorted = {k: v for k, v in sorted(
-        record_len.items(), key=lambda item: item[1], reverse=True)}
-    orf_record_sorted = {k: v for k, v in sorted(
-        orf_record.items(), key=lambda item: item[1][1], reverse=True)}
+    record_len_sorted = {k: v for k, v in sorted(record_len.items(), key=lambda item: item[1], reverse=True)}
+    orf_record_sorted = {k: v for k, v in sorted( orf_record.items(), key=lambda item: item[1][1], reverse=True)}
 
     print("Number of records: ", record_num, '\n')
     print("Sorted records length: ", record_len_sorted, '\n')
-    print("ORF%s, sorted by length: " %
-          str(reading_frame), orf_record_sorted, '\n')
-    print("Counter of repeats of length n, most common 5: ",
-          Counter(sub_sum).most_common(5))
+    print("ORF%s, sorted by length: " % (reading_frame), orf_record_sorted, '\n')
+    print("Counter of repeats of length n, most common 5: ", Counter(sub_sum).most_common(5))
 
 
 if __name__ == '__main__':
     input_file = 'dna2.fasta'
+
+
+fasta_analysis(input_file, 1, 7)
